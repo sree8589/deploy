@@ -12,15 +12,15 @@ def train_model():
     X_train, X_test, y_train, y_test = train_test_split(iris.data, iris.target, random_state=42)
     model = LogisticRegression(max_iter=200)
     model.fit(X_train, y_train)
-    with open("model.pkl", "wb") as f:
+    with open("/app/model.pkl", "wb") as f:
         pickle.dump(model, f)
 
 try:
-    with open("model.pkl", "rb") as f:
+    with open("/app/model.pkl", "rb") as f:
         model = pickle.load(f)
 except:
     train_model()
-    with open("app/model.pkl", "rb") as f:
+    with open("/app/model.pkl", "rb") as f:
         model = pickle.load(f)
 
 @app.route("/predict", methods=["POST"])
